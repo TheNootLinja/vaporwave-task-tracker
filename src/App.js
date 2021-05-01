@@ -2,6 +2,7 @@ import Button from './components/Button';
 import Tasks from './components/Tasks';
 import NewTask from './components/NewTask';
 import './App.css';
+import { useState } from 'react';
 
 const taskList = [
   {
@@ -55,14 +56,13 @@ const taskList = [
 ]
 
 function App() {
-  let showNewTask = false;
+  const [showNewTask, setShowNewTask] = useState(false);
   function handleClick() {
-    showNewTask = !showNewTask;
+    setShowNewTask(!showNewTask);
   }
   return (
     <div className="App">
-      <Button className='neon-button add-task' bText='+ Add Task'/>
-        <button onClick={handleClick}>Click Me</button>
+      <Button  handleClick={handleClick} className='neon-button add-task' bText='+ Add Task'/>
         {showNewTask && <NewTask />}
         {taskList.map(task => (
           <Tasks id={task.id} taskName={task.name} taskDateTime={task.dateTime} taskDesc={task.desc}/>
