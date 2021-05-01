@@ -5,8 +5,11 @@
   border: var(--clr-neon) 0.125em solid;
   font-size: 2rem;
   padding: 0.25em 1.25em;
+  width: 95%;
   background-color: rgba(0, 0, 0, 0);
   border-radius: 0.25em;
+  margin-top: 1em;
+  margin-bottom: 1em;
 
   text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.2), 0 0 0.25em var(--clr-neon);
 
@@ -15,7 +18,7 @@
   position: relative;
 }
 
-.neon-button::before {
+/* .neon-button::before {
   content: '';
   position: absolute;
   background: var(--clr-neon);
@@ -26,8 +29,10 @@
 
   transform: perspective(1em) rotateX(40deg) scale(1, 0.35);
   filter: blur(0.9em);
-}
+} */
 
 .submit {
-  width: 300px;
+}
+
+.add-task {
 }
