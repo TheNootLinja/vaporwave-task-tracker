@@ -67,7 +67,6 @@ function App() {
         {taskList.map(task => (
           <Tasks id={task.id} taskName={task.name} taskDateTime={task.dateTime} taskDesc={task.desc}/>
         ))}
-        <Button className='neon-button submit' bText='Submit'/>
     </div>
   );
 }
