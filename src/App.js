@@ -62,7 +62,7 @@ function App() {
   }
   return (
     <div className="App">
-      <Button  handleClick={handleClick} className='neon-button add-task' bText='+ Add Task'/>
+      <Button  handleClick={handleClick} className='neon-button add-task' bText={!showNewTask ? '+ Add Task': 'Close'}/>
         {showNewTask && <NewTask />}
         {taskList.map(task => (
           <Tasks id={task.id} taskName={task.name} taskDateTime={task.dateTime} taskDesc={task.desc}/>
