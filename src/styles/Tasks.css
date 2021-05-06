@@ -9,4 +9,7 @@
 
 .delete-button {
   color: red;
+  cursor: pointer;
+  width: fit-content;
+  margin: 1rem auto 0 auto;
 }
