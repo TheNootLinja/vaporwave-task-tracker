@@ -60,7 +60,6 @@ function App() {
       },
     ]
   )
-  console.log(taskList);
   function handleClick() {
     setShowNewTask(!showNewTask);
   }
@@ -74,11 +73,8 @@ function App() {
     setTaskList(...taskList, newTask);
   };
   function deleteTask(e) {
-    console.log('DELETEING TASK!');
     const taskId = parseInt(e.target.dataset.key);
-    console.log(taskId);
     const newTaskList = taskList.filter(task => task.id !== parseInt(taskId));
-    console.log(newTaskList);
     setTaskList(newTaskList);
   };
   return (
