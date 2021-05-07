@@ -31,6 +31,11 @@
   filter: blur(0.9em);
 } */
 
+.neon-button:hover {
+  background-color: var(--clr-neon);
+  color: black;
+}
+
 .submit {
 }
 
