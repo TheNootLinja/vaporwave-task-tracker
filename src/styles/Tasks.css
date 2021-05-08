@@ -8,6 +8,10 @@
   border: 3px solid var(--clr-neon);
 }
 
+label {
+  text-align: left;
+}
+
 .delete-button {
   color: red;
   cursor: pointer;

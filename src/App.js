@@ -91,7 +91,7 @@ function App() {
       }
       setShowNewTask(false);
       setTaskName('');
-      setTaskDate(null);
+      setTaskDate('');
       setTaskDesc('');
       setTaskList([ newTask, ...taskList])
     }
@@ -118,6 +118,7 @@ function App() {
           handleTaskDesc={handleTaskDesc}
           />
         }
+        {taskList.length === 0 && <h2>No tasks to show!</h2>}
         {taskList.reverse().map(task => (
           <Tasks key={task.id} taskId={task.id} taskName={task.name} taskDateTime={task.dateTime} taskDesc={task.desc} onDelete={deleteTask}/>
         ))}
