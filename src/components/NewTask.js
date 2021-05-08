@@ -2,9 +2,10 @@ import '../styles/NewTasks.css';
 
 import Button from '../components/Button';
 
-function NewTask({handleNewTask, taskName, handleTaskName, taskDate, handleTaskDate, taskDesc, handleTaskDesc}) {
+function NewTask({handleNewTask, taskName, handleTaskName, taskDate, handleTaskDate, taskDesc, handleTaskDesc, showFormError}) {
     return (
         <div>
+            {showFormError && <h2>Please Fill Out The Form Before Submitting!</h2>}
             <label htmlFor='task-name'>Task Name</label>
             <input type="text" name='task-name' value={taskName} onChange={handleTaskName}/>
             <label htmlFor='task-date'>Task Date</label>

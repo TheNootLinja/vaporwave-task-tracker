@@ -8,7 +8,8 @@ function App() {
   const [ taskName, setTaskName ] = useState('');
   const [ taskDate, setTaskDate ] = useState('');
   const [ taskDesc, setTaskDesc ] = useState('');
-  const [showNewTask, setShowNewTask] = useState(false);
+  const [ showNewTask, setShowNewTask ] = useState(false);
+  const [ showFormError, setShowFormError ] = useState(false)
   const [ taskList, setTaskList ] = useState(
     [
       {
@@ -71,21 +72,29 @@ function App() {
     setTaskDesc(e.target.value);
   }
   function handleClick() {
+    setShowFormError(false);
     setShowNewTask(!showNewTask);
   }
   function handleNewTask() {
-    const newTaskId = Math.floor(Math.random() * 9999);
-    const newTask = {
-      id: newTaskId,
-      name: taskName,
-      dateTime: taskDate,
-      desc: taskDesc
+    if(taskName === '' || taskDate === '' || taskDesc === '' ) {
+      console.log('Form is empty, fill it out!')
+      setShowFormError(true);
     }
-    setShowNewTask(false);
-    setTaskName('');
-    setTaskDate(null);
-    setTaskDesc('');
-    setTaskList([ newTask, ...taskList])
+    else {
+      console.log(taskDate);
+      const newTaskId = Math.floor(Math.random() * 9999);
+      const newTask = {
+        id: newTaskId,
+        name: taskName,
+        dateTime: taskDate,
+        desc: taskDesc
+      }
+      setShowNewTask(false);
+      setTaskName('');
+      setTaskDate(null);
+      setTaskDesc('');
+      setTaskList([ newTask, ...taskList])
+    }
   };
   function deleteTask(e) {
     const taskId = parseInt(e.target.dataset.key);
@@ -98,7 +107,8 @@ function App() {
       <Button  handleClick={handleClick} className='neon-button add-task' bText={!showNewTask ? '+ Add Task': 'Close'}/>
         {showNewTask 
         && 
-        <NewTask 
+        <NewTask  
+          showFormError={showFormError}
           handleNewTask={handleNewTask} 
           taskName={taskName}
           handleTaskName={handleTaskName}
