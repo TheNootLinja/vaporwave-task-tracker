@@ -5,9 +5,10 @@ import './App.css';
 import { useState } from 'react';
 
 function App() {
+  const [ taskName, setTaskName ] = useState('');
+  const [ taskDate, setTaskDate ] = useState('');
+  const [ taskDesc, setTaskDesc ] = useState('');
   const [showNewTask, setShowNewTask] = useState(false);
-  // TODO: Need to set up adding new tasks to the taskList state object
-  // TODO: which will most likely mean I need to use a reducer.
   const [ taskList, setTaskList ] = useState(
     [
       {
@@ -60,17 +61,31 @@ function App() {
       },
     ]
   )
+  function handleTaskName(e) {
+    setTaskName(e.target.value);
+  }
+  function handleTaskDate(e) {
+    setTaskDate(e.target.value);
+  }
+  function handleTaskDesc(e) {
+    setTaskDesc(e.target.value);
+  }
   function handleClick() {
     setShowNewTask(!showNewTask);
   }
-  function handleNewTask({taskName, taskDateTime, taskDesc}) {
+  function handleNewTask() {
+    const newTaskId = Math.floor(Math.random() * 9999);
     const newTask = {
-      id: Math.random(),
+      id: newTaskId,
       name: taskName,
-      dateTime: taskDateTime,
-      desc: taskDesc,
-    };
-    setTaskList(...taskList, newTask);
+      dateTime: taskDate,
+      desc: taskDesc
+    }
+    setShowNewTask(false);
+    setTaskName('');
+    setTaskDate(null);
+    setTaskDesc('');
+    setTaskList([ newTask, ...taskList])
   };
   function deleteTask(e) {
     const taskId = parseInt(e.target.dataset.key);
@@ -79,9 +94,21 @@ function App() {
   };
   return (
     <div className="App">
+              <p>{taskName}</p>
       <Button  handleClick={handleClick} className='neon-button add-task' bText={!showNewTask ? '+ Add Task': 'Close'}/>
-        {showNewTask && <NewTask handleNewTask={handleNewTask} />}
-        {taskList.map(task => (
+        {showNewTask 
+        && 
+        <NewTask 
+          handleNewTask={handleNewTask} 
+          taskName={taskName}
+          handleTaskName={handleTaskName}
+          taskDate={taskDate}
+          handleTaskDate={handleTaskDate}
+          taskDesc={taskDesc}
+          handleTaskDesc={handleTaskDesc}
+          />
+        }
+        {taskList.reverse().map(task => (
           <Tasks key={task.id} taskId={task.id} taskName={task.name} taskDateTime={task.dateTime} taskDesc={task.desc} onDelete={deleteTask}/>
         ))}
     </div>

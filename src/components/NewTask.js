@@ -2,16 +2,16 @@ import '../styles/NewTasks.css';
 
 import Button from '../components/Button';
 
-function NewTask() {
+function NewTask({handleNewTask, taskName, handleTaskName, taskDate, handleTaskDate, taskDesc, handleTaskDesc}) {
     return (
         <div>
             <label htmlFor='task-name'>Task Name</label>
-            <input type="text" name='task-name' />
+            <input type="text" name='task-name' value={taskName} onChange={handleTaskName}/>
             <label htmlFor='task-date'>Task Date</label>
-            <input type="date" name='task-name'/>
+            <input type="date" name='task-date' value={taskDate} onChange={handleTaskDate}/>
             <label htmlFor='task-desc'>Task Description</label>
-            <textarea name="task-desc" id="" cols="30" rows="10"></textarea>
-            <Button className='neon-button submit' bText='Submit' />
+            <textarea name="task-desc" id="" cols="30" rows="10" value={taskDesc} onChange={handleTaskDesc}></textarea>
+            <Button className='neon-button submit' bText='Submit' handleClick={handleNewTask}/>
         </div>
     )
 }
