@@ -105,8 +105,6 @@ function App() {
     <div className="App">
               <p>{taskName}</p>
       <Button  handleClick={handleClick} className='neon-button add-task' bText={!showNewTask ? '+ Add Task': 'Close'}/>
-        {showNewTask 
-        && 
         <NewTask  
           showFormError={showFormError}
           handleNewTask={handleNewTask} 
@@ -116,8 +114,8 @@ function App() {
           handleTaskDate={handleTaskDate}
           taskDesc={taskDesc}
           handleTaskDesc={handleTaskDesc}
+          showNewTask={showNewTask}
           />
-        }
         {taskList.length === 0 && <h2>No tasks to show!</h2>}
         {taskList.reverse().map(task => (
           <Tasks key={task.id} taskId={task.id} taskName={task.name} taskDateTime={task.dateTime} taskDesc={task.desc} onDelete={deleteTask}/>

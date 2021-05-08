@@ -24,3 +24,25 @@ textarea {
   box-shadow: 0 0 1em 0 var(--clr-neon);
   border: 2px solid var(--clr-neon);
 }
+
+.roll-appear {
+  opacity: 0;
+}
+
+.roll-enter {
+  opacity: 0;
+}
+
+.roll-enter-done {
+  opacity: 1;
+  transition: opacity 1000ms;
+}
+
+.roll-exit {
+  opacity: 1;
+}
+
+.roll-exit-active {
+  opacity: 0;
+  transition: opacity 1000ms;
+}
