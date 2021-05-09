@@ -67,6 +67,7 @@ function App() {
     }
   };
   function deleteTask(e) {
+    console.log(e)
     const taskId = parseInt(e.target.dataset.key);
     const newTaskList = taskList.filter(task => task.id !== parseInt(taskId));
     setTaskList(newTaskList);

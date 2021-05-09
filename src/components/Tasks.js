@@ -5,14 +5,17 @@ function Tasks({ taskName, taskDateTime, taskDesc, taskId, onDelete }) {
   return (
     <div className="tasks">
       <div className="task">
-        <FaTimesCircle
-          className="delete-button"
-          data-key={taskId}
-          onClick={onDelete}
-        />
-        <p>{taskName}</p>
-        <p>{taskDateTime}</p>
-        <p>{taskDesc}</p>
+        <div>
+          {/* <FaTimesCircle
+            className="delete-button del-icon"
+            data-key={taskId}
+            onClick={onDelete}
+          /> */}
+          <p  className="delete-button" data-key={taskId} onClick={onDelete}>X</p>
+        </div>
+        <p className='task-info'>{taskName}</p>
+        <p className='task-info'>{taskDateTime}</p>
+        <p className='task-info'>{taskDesc}</p>
       </div>
     </div>
   );
