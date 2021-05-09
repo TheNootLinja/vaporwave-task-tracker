@@ -30,36 +30,6 @@ function App() {
         dateTime: '02/01/2021',
         desc: 'task3 description',
       },
-      {
-        id: 4,
-        name: 'task4',
-        dateTime: '02/01/2021',
-        desc: 'task4 description',
-      },
-      {
-        id: 5,
-        name: 'task5',
-        dateTime: '02/01/2021',
-        desc: 'task1 description',
-      },
-      {
-        id: 6,
-        name: 'task6',
-        dateTime: '02/01/2021',
-        desc: 'task2 description',
-      },
-      {
-        id: 7,
-        name: 'task7',
-        dateTime: '02/01/2021',
-        desc: 'task3 description',
-      },
-      {
-        id: 8,
-        name: 'task8',
-        dateTime: '02/01/2021',
-        desc: 'task4 description',
-      },
     ]
   )
   function handleTaskName(e) {

@@ -8,13 +8,19 @@
   border: 3px solid var(--clr-neon);
 }
 
+.tasks p {
+  margin: 0.5rem;
+}
+
 label {
   text-align: left;
+}
+
+.delete-button-container {
+  align-content: right;
 }
 
 .delete-button {
   color: red;
   cursor: pointer;
-  width: fit-content;
-  margin: 1rem auto 0 auto;
 }
