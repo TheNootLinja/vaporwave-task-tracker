@@ -5,9 +5,11 @@ import './App.css';
 import { useState } from 'react';
 
 function App() {
-  const [showNewTask, setShowNewTask] = useState(false);
-  // TODO: Need to set up adding new tasks to the taskList state object
-  // TODO: which will most likely mean I need to use a reducer.
+  const [ taskName, setTaskName ] = useState('');
+  const [ taskDate, setTaskDate ] = useState('');
+  const [ taskDesc, setTaskDesc ] = useState('');
+  const [ showNewTask, setShowNewTask ] = useState(false);
+  const [ showFormError, setShowFormError ] = useState(false)
   const [ taskList, setTaskList ] = useState(
     [
       {
@@ -28,64 +30,65 @@ function App() {
         dateTime: '02/01/2021',
         desc: 'task3 description',
       },
-      {
-        id: 4,
-        name: 'task4',
-        dateTime: '02/01/2021',
-        desc: 'task4 description',
-      },
-      {
-        id: 5,
-        name: 'task5',
-        dateTime: '02/01/2021',
-        desc: 'task1 description',
-      },
-      {
-        id: 6,
-        name: 'task6',
-        dateTime: '02/01/2021',
-        desc: 'task2 description',
-      },
-      {
-        id: 7,
-        name: 'task7',
-        dateTime: '02/01/2021',
-        desc: 'task3 description',
-      },
-      {
-        id: 8,
-        name: 'task8',
-        dateTime: '02/01/2021',
-        desc: 'task4 description',
-      },
     ]
   )
-  console.log(taskList);
+  function handleTaskName(e) {
+    setTaskName(e.target.value);
+  }
+  function handleTaskDate(e) {
+    setTaskDate(e.target.value);
+  }
+  function handleTaskDesc(e) {
+    setTaskDesc(e.target.value);
+  }
   function handleClick() {
+    setShowFormError(false);
     setShowNewTask(!showNewTask);
   }
-  function handleNewTask({taskName, taskDateTime, taskDesc}) {
-    const newTask = {
-      id: Math.random(),
-      name: taskName,
-      dateTime: taskDateTime,
-      desc: taskDesc,
-    };
-    setTaskList(...taskList, newTask);
+  function handleNewTask() {
+    if(taskName === '' || taskDate === '' || taskDesc === '' ) {
+      console.log('Form is empty, fill it out!')
+      setShowFormError(true);
+    }
+    else {
+      console.log(taskDate);
+      const newTaskId = Math.floor(Math.random() * 9999);
+      const newTask = {
+        id: newTaskId,
+        name: taskName,
+        dateTime: taskDate,
+        desc: taskDesc
+      }
+      setShowNewTask(false);
+      setTaskName('');
+      setTaskDate('');
+      setTaskDesc('');
+      setTaskList([ newTask, ...taskList])
+    }
   };
   function deleteTask(e) {
-    console.log('DELETEING TASK!');
+    console.log(e)
     const taskId = parseInt(e.target.dataset.key);
-    console.log(taskId);
     const newTaskList = taskList.filter(task => task.id !== parseInt(taskId));
-    console.log(newTaskList);
     setTaskList(newTaskList);
   };
   return (
     <div className="App">
+              <p>{taskName}</p>
       <Button  handleClick={handleClick} className='neon-button add-task' bText={!showNewTask ? '+ Add Task': 'Close'}/>
-        {showNewTask && <NewTask handleNewTask={handleNewTask} />}
-        {taskList.map(task => (
+        <NewTask  
+          showFormError={showFormError}
+          handleNewTask={handleNewTask} 
+          taskName={taskName}
+          handleTaskName={handleTaskName}
+          taskDate={taskDate}
+          handleTaskDate={handleTaskDate}
+          taskDesc={taskDesc}
+          handleTaskDesc={handleTaskDesc}
+          showNewTask={showNewTask}
+          />
+        {taskList.length === 0 && <h2>No tasks to show!</h2>}
+        {taskList.reverse().map(task => (
           <Tasks key={task.id} taskId={task.id} taskName={task.name} taskDateTime={task.dateTime} taskDesc={task.desc} onDelete={deleteTask}/>
         ))}
     </div>

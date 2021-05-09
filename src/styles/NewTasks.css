@@ -1,3 +1,49 @@
 label {
   color: var(--clr-neon);
+  text-align: center;
+  padding-top: 0.5rem;
+  font-size: 1.75rem;
+  font-family: 'Comfortaa', cursive;
+}
+
+h2 {
+  color: red;
+}
+
+.form-container {
+  display: grid;
+  width: 100%;
+}
+
+input {
+  width: 100%;
+  box-shadow: 0 0 1em 0 var(--clr-neon);
+  border: 2px solid var(--clr-neon);
+}
+
+textarea {
+  box-shadow: 0 0 1em 0 var(--clr-neon);
+  border: 2px solid var(--clr-neon);
+}
+
+.roll-appear {
+  opacity: 0;
+}
+
+.roll-enter {
+  opacity: 0;
+}
+
+.roll-enter-done {
+  opacity: 1;
+  transition: opacity 1000ms;
+}
+
+.roll-exit {
+  opacity: 1;
+}
+
+.roll-exit-active {
+  opacity: 0;
+  transition: opacity 1000ms;
 }
