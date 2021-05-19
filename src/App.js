@@ -81,12 +81,20 @@ function App() {
     };
     getAPI();
   }
-  function deleteTask(e) {
-    console.log(e);
-    const taskId = parseInt(e.target.dataset.key);
-    const newTaskList = taskList.filter((task) => task.id !== parseInt(taskId));
-    setTaskList(newTaskList);
+
+  async function deleteTask(e) {
+    console.log(e.target.dataset.key);
+    const taskId = e.target.dataset.key;
+    await fetch(`http://localhost:8080/delete/${taskId}`, {
+      method: 'POST',
+      body: JSON.stringify({
+        taskId: taskId,
+      }),
+    });
+    // const newTaskList = taskList.filter((task) => task.id !== parseInt(taskId));
+    // setTaskList(newTaskList);
   }
+
   return (
     <div className="App">
       <p>{taskName}</p>
