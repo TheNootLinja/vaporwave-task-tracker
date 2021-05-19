@@ -10,7 +10,7 @@ function App() {
   const [taskDesc, setTaskDesc] = useState('');
   const [showNewTask, setShowNewTask] = useState(false);
   const [showFormError, setShowFormError] = useState(false);
-  const [taskList, setTaskList] = useState([{}]);
+  const [taskList, setTaskList] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -41,32 +41,60 @@ function App() {
     setShowFormError(false);
     setShowNewTask(!showNewTask);
   }
-  function handleNewTask() {
+  async function handleNewTask() {
     if (taskName === '' || taskDate === '' || taskDesc === '') {
       console.log('Form is empty, fill it out!');
       setShowFormError(true);
     } else {
-      console.log(taskDate);
-      const newTaskId = Math.floor(Math.random() * 9999);
-      const newTask = {
-        id: newTaskId,
-        name: taskName,
-        dateTime: taskDate,
-        desc: taskDesc,
+      // ===========================
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: taskName,
+          dateTime: taskDate,
+          desc: taskDesc,
+        }),
       };
+      const response = await fetch(
+        'http://localhost:8080/add-task',
+        requestOptions
+      );
+      const data = await response.json();
+      // this.setState({ postId: data.id });
+      // ===========================
       setShowNewTask(false);
       setTaskName('');
       setTaskDate('');
       setTaskDesc('');
-      setTaskList([newTask, ...taskList]);
     }
+    const getAPI = async () => {
+      const response = await fetch('http://localhost:8080/');
+      const data = await response.json();
+      try {
+        console.log(data);
+        setLoading(false);
+        setTaskList(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getAPI();
   }
-  function deleteTask(e) {
-    console.log(e);
-    const taskId = parseInt(e.target.dataset.key);
-    const newTaskList = taskList.filter((task) => task.id !== parseInt(taskId));
-    setTaskList(newTaskList);
+
+  async function deleteTask(e) {
+    console.log(e.target.dataset.key);
+    const taskId = e.target.dataset.key;
+    await fetch(`http://localhost:8080/delete/${taskId}`, {
+      method: 'POST',
+      body: JSON.stringify({
+        taskId: taskId,
+      }),
+    });
+    // const newTaskList = taskList.filter((task) => task.id !== parseInt(taskId));
+    // setTaskList(newTaskList);
   }
+
   return (
     <div className="App">
       <p>{taskName}</p>

@@ -48,6 +48,7 @@ function NewTask({
           onChange={handleTaskDesc}
         ></textarea>
         <Button
+          type="submit"
           className="neon-button submit"
           bText="Submit"
           handleClick={handleNewTask}
