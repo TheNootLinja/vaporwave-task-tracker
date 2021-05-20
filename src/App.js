@@ -14,19 +14,19 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const getAPI = async () => {
-      const response = await fetch('http://localhost:8080/');
-      const data = await response.json();
-      try {
-        console.log(data);
-        setLoading(false);
-        setTaskList(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
     getAPI();
   }, []);
+
+  const getAPI = async () => {
+    const response = await fetch('http://localhost:8080/');
+    const data = await response.json();
+    try {
+      setLoading(false);
+      setTaskList(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   function handleTaskName(e) {
     setTaskName(e.target.value);
@@ -43,10 +43,8 @@ function App() {
   }
   async function handleNewTask() {
     if (taskName === '' || taskDate === '' || taskDesc === '') {
-      console.log('Form is empty, fill it out!');
       setShowFormError(true);
     } else {
-      // ===========================
       const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -61,29 +59,15 @@ function App() {
         requestOptions
       );
       const data = await response.json();
-      // this.setState({ postId: data.id });
-      // ===========================
       setShowNewTask(false);
       setTaskName('');
       setTaskDate('');
       setTaskDesc('');
     }
-    const getAPI = async () => {
-      const response = await fetch('http://localhost:8080/');
-      const data = await response.json();
-      try {
-        console.log(data);
-        setLoading(false);
-        setTaskList(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
     getAPI();
   }
 
   async function deleteTask(e) {
-    console.log(e.target.dataset.key);
     const taskId = e.target.dataset.key;
     await fetch(`http://localhost:8080/delete/${taskId}`, {
       method: 'POST',
@@ -91,13 +75,13 @@ function App() {
         taskId: taskId,
       }),
     });
+    getAPI();
     // const newTaskList = taskList.filter((task) => task.id !== parseInt(taskId));
     // setTaskList(newTaskList);
   }
 
   return (
     <div className="App">
-      <p>{taskName}</p>
       <Button
         handleClick={handleClick}
         className="neon-button add-task"
