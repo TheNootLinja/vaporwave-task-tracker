@@ -11,6 +11,19 @@
   border: 3px solid var(--clr-neon);
 }
 
+.task {
+  position: relative;
+}
+
+.edit-icon {
+  position: absolute;
+  height: 35px;
+  width: 35px;
+  right: 15px;
+  bottom: -30px;
+  cursor: pointer;
+}
+
 .tasks p {
   margin: auto;
 }

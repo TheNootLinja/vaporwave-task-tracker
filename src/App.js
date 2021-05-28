@@ -28,6 +28,11 @@ function App() {
     }
   };
 
+  function handleEditClick() {
+    console.log('Clicked the edit button!');
+    setShowNewTask(!showNewTask);
+  }
+
   function handleTaskName(e) {
     setTaskName(e.target.value);
   }
@@ -108,6 +113,7 @@ function App() {
           taskDateTime={task.dateTime}
           taskDesc={task.desc}
           onDelete={deleteTask}
+          onEdit={handleEditClick}
         />
       ))}
     </div>
